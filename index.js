@@ -5,6 +5,7 @@ const debounce =require('lodash.debounce');
 const program = require('caporal');
 const fs = require('fs');
 const {spawn} = require('child_process');
+const chalk = require('chalk');
 
 program
 .version('0.0.1')
@@ -18,10 +19,14 @@ program
         throw new Error(`could not find the file ${name}`);
     }
 
-
+let proc;
     
 const start =debounce(() => {
-    spawn('node', [name], {stdio: 'inherit'})
+    if(proc){
+        proc.kill();
+    }
+    console.log(chalk.blue('>>starting process<<'));
+   proc = spawn('node', [name], {stdio: 'inherit'})
 }, 100)
 
 chokidar

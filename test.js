@@ -1,1 +1,5 @@
-console.log('hello there')
+setInterval(() => {
+
+console.log('bye there')
+
+}, 1000)
